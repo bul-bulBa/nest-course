@@ -10,7 +10,7 @@ export class MovieDto {
     @IsInt()
     @Min(1888)
     @Max(new Date().getFullYear())
-    releaseYear: string
+    releaseYear: number
 
     @IsOptional()
     @IsString()
