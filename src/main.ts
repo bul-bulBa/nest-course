@@ -2,31 +2,20 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
-import { LoggingMiddleware } from './common/middlewares/logger.middleware';
-import { ResponseInterceptor } from './common/interceptors/response.interceptor';
-import { AllExceptionFilter } from './common/filters/all-exeption.filter';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
+import cookieParser from 'cookie-parser'
+import { setupSwagger } from './utils/swagger.util';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // app.useGlobalPipes(new ValidationPipe)
-  // app.use(LoggingMiddleware)
-  // app.useGlobalInterceptors(new ResponseInterceptor)
-  // app.useGlobalFilters(new AllExceptionFilter)
+  app.use(cookieParser())
 
-  const config = new DocumentBuilder()
-  .setTitle('Nest Course api')
-  .setDescription('api documentation')
-  .setVersion('1.0.0')
-  .setContact('bul bulBA', 'http/example.com', 'support...')
-  .addBearerAuth()
-  .build()
+  app.useGlobalPipes(new ValidationPipe())
 
-  const document = SwaggerModule.createDocument(app, config)
-
-  SwaggerModule.setup('/docs', app, document)
+  setupSwagger(app)
 
   await app.listen(process.env.PORT ?? 3000);
 }
