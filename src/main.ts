@@ -6,7 +6,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import cookieParser from 'cookie-parser'
 import { ConfigService } from '@nestjs/config';
-import { CustomLogger } from './common/loggers/logger.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -17,14 +16,7 @@ async function bootstrap() {
 
   app.use(cookieParser())
 
-  app.useLogger(new CustomLogger)
-
   app.useGlobalPipes(new ValidationPipe())
-
-  app.enableVersioning({
-    type: VersioningType.URI,
-    defaultVersion: '1'
-  })
 
   app.enableCors({
     origin: config.getOrThrow<string>('ALLOWED_ORIGINS').split(','),

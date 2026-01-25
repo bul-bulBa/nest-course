@@ -1,10 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
-import { FileModule } from './file/file.module';
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { TaskModule } from './task/task.module';
 import * as path from 'path'
+import { InfraModule } from './infra/infra.module';
+import { ApiModule } from './api/api.module'; 
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -13,11 +14,10 @@ import * as path from 'path'
       rootPath: path.join(__dirname, '..', 'uploads'),
       serveRoot: '/static'
     }),
-    PrismaModule,
-    FileModule,
-    TaskModule,
+    InfraModule,
+    ApiModule,
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -45,6 +45,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "cookie-parser": "^1.4.7",
+    "geoip-country": "^5.0.202601232344",
     "graphql": "^16.12.0",
     "multer": "^2.0.2",
     "passport": "^0.7.0",
@@ -54,6 +55,7 @@
     "rxjs": "^7.8.1",
     "socket.io": "^4.8.3",
     "typeorm": "^0.3.28",
+    "ua-parser-js": "^2.0.8",
     "uuid": "^13.0.0"
   },
   "devDependencies": {
@@ -65,6 +67,7 @@
     "@nestjs/testing": "^11.1.12",
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.0",
+    "@types/geoip-country": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/multer": "^2.0.0",
     "@types/node": "^22.10.7",
